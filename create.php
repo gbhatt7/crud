@@ -94,18 +94,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <label for="event" class="col-sm-3 col-form-label">Event</label>
                     <div class="col-sm-8">
-                            <label>
-                                <input type="checkbox" name="colors[]" value="1"> Red
-                            </label>
-                            <br>
-                            <label>
-                                <input type="checkbox" name="colors[]" value="2"> Green
-                            </label>
-                            <br>
-                            <label>
-                                <input type="checkbox" name="colors[]" value="3"> Blue
-                            </label>
-                            <br>
+                            <?php
+                            $sql = "SELECT * FROM `event`";
+                            $result = $connection->query($sql);
+            
+                            if (!$result) {
+                                die("Invalid query: ");
+                            }
+                            while($row = $result->fetch_assoc()){
+                                echo "
+                                <label>
+                                <input type='checkbox' name='colors[]' value='{$row['id']}'>
+                                <td>{$row['id']}</td>
+                                <td>{$row['ename']}</td>
+                                </label>";
+                            }
+                            ?>
                     </div>
                 </div>
                 <div class="input-group mb-3">
