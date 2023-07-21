@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //add new client to database
         $sql = "INSERT INTO employee(name,event,image)" .
-            "VALUES ('$name', '$event','$imgpath')";
+            "VALUES ('$name', '$event', '$imgpath')";
         $result = $connection->query($sql);
 
         if (!$result) {
