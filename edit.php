@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //show data
 
     if (!isset($_GET["id"])) {
-        header("location: /crud/index.php");
+        header("location: /gaurav/crud/index.php");
         exit;
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $row = $result->fetch_assoc();
 
     if (!$row) {
-        header("location: /crud/index.php");
+        header("location: /gaurav/crud/index.php");
         exit;
     }
 
@@ -37,12 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $image = $row["image"];
     
 } else {
-    if($editimage!=$image){
+    if(!empty($editimage)){
     //update data
     $id = $_POST["id"];
     $name = $_POST["name"];
     $event = $_POST["event"];
-    image_remove($image);
     $imgpath = image_upload($_FILES['editimage']);
 
     do {
@@ -51,7 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $errorMessage = "ALL THE FIELDS ARE REQUIRED !";
             break;
         }
-
+            $query = "SELECT * FROM `employee` WHERE `id` = '$id'";
+            $result = mysqli_query($connection, $query);
+            $fetch = mysqli_fetch_assoc($result);
+        
+            image_remove($fetch['image']);
         //add new client to database
         $sql = "UPDATE employee " .
             "SET name='$name', event='$event', image='$imagePath'" .
@@ -65,14 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $successMessage = "CLIENT UPDATED SUCCESSFULLY";
 
-        header("location: /crud/index.php");
+        header("location: /gaurav/crud/index.php");
         exit;
+
     } while (true);
     } else{
         //update data
     $id = $_POST["id"];
     $name = $_POST["name"];
     $event = $_POST["event"];
+    $image = $_POST["image"];
 
     do {
 
@@ -83,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         //add new client to database
         $sql = "UPDATE employee " .
-            "SET name='$name', event='$event'" .
+            "SET name='$name', event='$event', image='$image' " .
             "WHERE id=$id";
         $result = $connection->query($sql);
 
@@ -94,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $successMessage = "CLIENT UPDATED SUCCESSFULLY";
 
-        header("location: /crud/index.php");
+        header("location: /gaurav/crud/index.php");
         exit;
     } while (true);
     }
@@ -220,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-danger" href="/crud/index.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-danger" href="/gaurav/crud/index.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

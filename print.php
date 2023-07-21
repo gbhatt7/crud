@@ -4,7 +4,7 @@ require 'dompdf/autoload.inc.php';
 
 // reference the Dompdf namespace
 use Dompdf\Dompdf;
-
+use Dompdf\Options;
 if ($connection->connect_error) {
     die("Connection failed: " );
 }
@@ -20,7 +20,9 @@ if (!$result) {
 $row = $result->fetch_assoc();
 
 // instantiate and use the dompdf class
-$dompdf = new Dompdf();
+$options = new Options();
+$options->set('isRemoteEnabled', true);
+$dompdf = new Dompdf($options);
 
 ob_start();
 require('details.php');

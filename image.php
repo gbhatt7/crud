@@ -1,8 +1,8 @@
 <?php
 
-define("UPLOAD_SRC", $_SERVER['DOCUMENT_ROOT'] . "/crud/uploads/");
+define("UPLOAD_SRC", $_SERVER['DOCUMENT_ROOT'] . "/gaurav/crud/uploads/");
 
-define("FETCH_SRC", "http://127.0.0.1/crud/uploads/");
+define("FETCH_SRC", "http://127.0.0.1/gaurav/crud/uploads/");
 
 $fetch_src = FETCH_SRC;
 
@@ -27,6 +27,7 @@ function image_remove($img)
         header("location: index.php?alert=img_rem_failed");
         exit;
     } else {
+        echo ("$img has been deleted");
     }
 }
 

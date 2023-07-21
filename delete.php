@@ -16,7 +16,7 @@ if (isset($_GET["id"])) {
     $connection->query($sql);
 };
 
-header("location: /crud/index.php");
+header("location: /gaurav/crud/index.php");
 exit;
 
 ?>

@@ -13,8 +13,20 @@ $successMessage = "";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $myArray=array();
+    if (isset($_POST["colors"]) && is_array($_POST["colors"])) {
+        $selectedColors = $_POST["colors"];
+        foreach ($selectedColors as $color) {
+            // Add the selected colors to the array
+            $myArray[] = $color;
+        }
+    } else {
+        echo '<p>No colors were selected.</p>';
+    }
+    // Convert the array to a comma-separated string
+    $event = implode(", ", $myArray);
+    
     $name = $_POST["name"];
-    $event = $_POST["event"];
     $imgpath = image_upload($_FILES['image']);
 
     do {
@@ -39,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $successMessage = "CLIENT ADDED SUCCESSFULLY";
 
-        header("location: /crud/index.php");
+        header("location: /gaurav/crud/index.php");
         exit;
     } while (false);
 }
@@ -82,7 +94,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <label for="event" class="col-sm-3 col-form-label">Event</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="event" value="<?php echo $event; ?>">
+                            <label>
+                                <input type="checkbox" name="colors[]" value="1"> Red
+                            </label>
+                            <br>
+                            <label>
+                                <input type="checkbox" name="colors[]" value="2"> Green
+                            </label>
+                            <br>
+                            <label>
+                                <input type="checkbox" name="colors[]" value="3"> Blue
+                            </label>
+                            <br>
                     </div>
                 </div>
                 <div class="input-group mb-3">
@@ -111,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-danger" href="/crud/index.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-danger" href="/gaurav/crud/index.php" role="button">Cancel</a>
                 </div>
             </div>
         </form>

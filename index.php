@@ -13,7 +13,7 @@
         <h2>List of Clients</h2>
         <div class="row">
             <div class="sm-3 col-sm-3 d-grid">
-                <a class="btn btn-primary" href="/crud/create.php" role="button">New Client</a>
+                <a class="btn btn-primary" href="/gaurav/crud/create.php" role="button">New Client</a>
             </div>
         </div>
         <br>
@@ -74,9 +74,9 @@
                     echo implode(', ', $myArray);
                     echo "</td>
                     <td>
-                        <a target='_blank' class='btn btn-success btn-sm' href='/crud/print.php?id=$row[id]'>Print Details</a>
-                        <a class='btn btn-primary btn-sm' href='/crud/edit.php?id={$row['id']}'>Edit</a>
-                        <a class='btn btn-danger btn-sm' href='/crud/delete.php?id={$row['id']}'>Delete</a>
+                        <a target='_blank' class='btn btn-success btn-sm' href='/gaurav/crud/print.php?id=$row[id]'>Print Details</a>
+                        <a class='btn btn-primary btn-sm' href='/gaurav/crud/edit.php?id={$row['id']}'>Edit</a>
+                        <a class='btn btn-danger btn-sm' href='/gaurav/crud/delete.php?id={$row['id']}'>Delete</a>
                     </td>
                 </tr>";
                 }
