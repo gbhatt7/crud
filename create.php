@@ -15,7 +15,7 @@ $successMessage = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST["name"];
     $event = $_POST["event"];
-    $imgPath = image_upload($_FILES['image']);
+    $imgpath = image_upload($_FILES['image']);
 
     do {
         if (empty($name) || empty($event)) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //add new client to database
         $sql = "INSERT INTO employee(name,event,image)" .
-            "VALUES ('$name', '$event','')";
+            "VALUES ('$name', '$event','$imgpath')";
         $result = $connection->query($sql);
 
         if (!$result) {
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <label for="event" class="col-sm-3 col-form-label">Event</label>
                     <div class="col-sm-8">
-                        <a class='btn btn-primary btn-sm' href='/crud/select_events.php'>Add Events</a>
+                        <input type="text" class="form-control" name="event" value="<?php echo $event; ?>">
                     </div>
                 </div>
                 <div class="input-group mb-3">
